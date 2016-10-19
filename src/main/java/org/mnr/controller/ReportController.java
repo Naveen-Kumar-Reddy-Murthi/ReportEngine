@@ -22,16 +22,18 @@ public class ReportController {
 		return new ModelAndView("schedule");
 	}
 	
-	@RequestMapping(value="/save")
+	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public ModelAndView saveSchedule(@Valid ReportScheuduleEntity reportScheuduleEntity,BindingResult bind){
-		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("saveSchedule method");
+		ModelAndView modelAndView = new ModelAndView("schedule");
 		if(bind.hasErrors())
 			return modelAndView;
 		else
 		{
 			System.out.println("data:"+reportScheuduleEntity);
-			modelAndView.addObject("reportScheuduleEntity", new ReportScheuduleEntity());
-			return modelAndView;
+			reportScheuduleEntity= new ReportScheuduleEntity();
+			modelAndView.addObject("reportScheuduleEntity",reportScheuduleEntity);
+			return new ModelAndView("schedule");
 		}
 	}
 }

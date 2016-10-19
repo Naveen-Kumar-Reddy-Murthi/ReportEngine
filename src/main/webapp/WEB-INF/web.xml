@@ -6,7 +6,7 @@
 	<display-name>Report Engine</display-name>
 
 	<welcome-file-list>
-		<welcome-file>schedule.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>Login.jsp</welcome-file>
 		<welcome-file>Login1.jsp</welcome-file>
 	</welcome-file-list>

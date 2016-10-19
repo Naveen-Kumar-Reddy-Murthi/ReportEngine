@@ -2,22 +2,25 @@ package org.mnr.entity;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
 /**
  * @author Naveen Reddy
  * @version 1.0
  */
 public class ReportScheuduleEntity {
-	@NotNull
+	@NotNull(message="Value can't be empty")
 	private String query;
-	@NotNull
+	@Length(min=4)
 	private String time;
-	@NotNull
+	@NotNull(message="Value can't be empty")
 	private String frequency;
-	@NotNull
+	@Email(message="Invalid Email id")
 	private String mailId;
-	@NotNull
+	@NotNull(message="Value can't be empty")
 	private String  day;
-	@NotNull
+	@NotNull(message="Value can't be empty")
 	private String dateTime;
 	public String getQuery() {
 		return query;

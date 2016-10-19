@@ -4,6 +4,7 @@
 </body>
 <center>
 
-<a ahref="schedule">schedule</a>
+<a href="schedule">schedule</a>
+
 </center>
 </html>
