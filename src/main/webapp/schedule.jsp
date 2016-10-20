@@ -19,13 +19,29 @@
 	});
 
 	function toggleFields() {
-		if ($("#frequency").val() === "D") {
-			$("#day").hide();
-			$("#dateTime").hide();
-		} else if($("#frequency").val() === "W")
-			{
-			$("#dateTime").hide();
-			}
+		if ($("#frequency").val() === "") {
+			$("#day-div").show();
+			$("#time-div").show();
+			$("#dateTime-div").show();
+		} else if ($("#frequency").val() === "D") {
+			$("#day-div").hide();
+			$("#dateTime-div").hide();
+			$("#time-div").show();
+		} else if ($("#frequency").val() === "W") {
+			$("#dateTime-div").hide();
+			$("#day-div").show();
+			$("#time-div").show();
+		}
+		else if ($("#frequency").val() === "M") {
+			$("#time-div").hide();
+			$("#day-div").hide();
+			$("#dateTime-div").show();
+		}
+		else if ($("#frequency").val() === "Y") {
+			$("#time-div").hide();
+			$("#day-div").hide();
+			$("#dateTime-div").show();
+		}
 	}
 </script>
 <title>ScheduleReport</title>
@@ -89,7 +105,7 @@
 				</spring:bind>
 			</div>
 
-			<div class="form-group row">
+			<div class="form-group row" id="day-div">
 				<spring:bind path="day">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="col-xs-2 col-form-label">Day</label>
@@ -109,8 +125,8 @@
 					</div>
 				</spring:bind>
 			</div>
-			
-			<div class="form-group row">
+
+			<div class="form-group row" id="time-div">
 				<spring:bind path="time">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="col-xs-2 col-form-label">Time</label>
@@ -122,15 +138,15 @@
 				</spring:bind>
 			</div>
 
-			
 
-			<div class="form-group row">
+
+			<div class="form-group row" id="dateTime-div">
 				<spring:bind path="dateTime">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="col-xs-2 col-form-label">Date Time</label>
 						<div class="col-xs-5">
 							<sf:input path="dateTime" type="datetime-local"
-								class="form-control" id="dateTime" />
+								class="form-control" id="dateTime" data-date-format="dd-mm-yyyy hh:ii"  />
 							<sf:errors path="dateTime" class="control-label" />
 						</div>
 					</div>
@@ -152,7 +168,7 @@
 
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-md-5">
-					<button type="submit" class="btn-lg btn-primary pull-right">Save
+					<button type="submit" class="btn-sm btn-primary pull-right">Save
 					</button>
 				</div>
 			</div>

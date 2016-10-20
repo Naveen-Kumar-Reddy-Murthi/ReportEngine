@@ -36,7 +36,44 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>3.1.1.RELEASE</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>3.1.1.RELEASE</version>
+		</dependency>
+		
 		<!-- spring mvc -->
+		
+		 <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-tx</artifactId>
+	      <version>3.1.1.RELEASE</version>
+	    </dependency>
+	    
+	    <dependency>
+	       <groupId>org.springframework</groupId>
+	       <artifactId>spring-orm</artifactId>
+	       <version>3.1.1.RELEASE</version>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>commons-dbcp</groupId>
+	      <artifactId>commons-dbcp</artifactId>
+	      <version>1.2.2</version>
+	    </dependency>
+	    
+	    <dependency>
+	    	<groupId>javax.persistence</groupId>
+	    	<artifactId>persistence-api</artifactId>
+	    	<version>1.0</version>
+	    </dependency> 
+	    
+	    <dependency>
+		    <groupId>javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.12.1.GA</version>
+		</dependency>
 
 		<!-- servlet -->
 		<dependency>

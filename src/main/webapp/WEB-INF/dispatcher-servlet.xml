@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc     
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd     
-    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-2.5.xsd
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	<context:component-scan base-package="org.mnr.entity, org.mnr.controller"/>
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	
+	<context:component-scan base-package="org.mnr.entity, org.mnr.controller, org.mnr.dao, org.mnr.service"/>
+	 <tx:annotation-driven transaction-manager="hibernateTransactionManager"/> 
 	<mvc:annotation-driven/>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -18,17 +27,34 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
-	<!-- <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="username" value="hr"/>
-		<property name="password" value="hr"/>
-	</bean> -->
+	 <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		 <property name="driverClassName" value="${database.driver}"/>
+		 <property name="url" value="${database.url}"/>
+		 <property name="username" value="${database.user}"/>
+		 <property name="password" value="${database.password}"/>
+	</bean>
+	
+	<bean class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" id="sessionFactory">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="annotatedClasses">
+			<list>
+				<value>org.mnr.entity.ReportScheuduleEntity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+			  <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+			  <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			  <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>    
+        	</props>
+		</property>
+	</bean>
 	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
  		<property name="locations">
 	 		 <list>
 	 		 	<value>/WEB-INF/application.properties</value><!--File extension must be provided -->
+	 		 	<value>/WEB-INF/database.properties</value>
 	 		 </list>
 		</property>
 	</bean>
@@ -36,6 +62,11 @@
 	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/validation"/>
 	</bean>
+	
+	 <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="hibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean> 
+	
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 </beans>
