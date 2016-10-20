@@ -37,7 +37,7 @@ public class ReportController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveSchedule(
 			@Valid ReportScheuduleEntity reportScheuduleEntity,
-			BindingResult bind, final RedirectAttributes redirectAttributes) {
+			BindingResult bind) {
 		System.out.println("saveSchedule method");
 		ModelAndView modelAndView = new ModelAndView("schedule");
 		if (bind.hasErrors())
@@ -49,11 +49,10 @@ public class ReportController {
 			
 			reportScheuduleEntity = null;
 			String message = "Data saved successfully!";
-			reportScheuduleEntity = new ReportScheuduleEntity();
-			redirectAttributes.addFlashAttribute("message", message);
+			modelAndView.addObject("message", message);
 			modelAndView.addObject("reportScheuduleEntity",
-					reportScheuduleEntity);
-			return new ModelAndView("schedule");
+					 new ReportScheuduleEntity());
+			return modelAndView;
 		}
 	}
 }

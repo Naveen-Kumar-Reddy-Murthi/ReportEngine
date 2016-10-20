@@ -61,7 +61,7 @@
 			<jstl:set var="message"
 				value="<%=request.getAttribute(\"message\")%>" />
 			<jstl:if test="${not empty message}">
-		message:<div class="form-group row">
+		<div class="form-group row">
 					<div class="alert alert-success">
 						<strong>Data saved successfully!</strong>
 					</div>
