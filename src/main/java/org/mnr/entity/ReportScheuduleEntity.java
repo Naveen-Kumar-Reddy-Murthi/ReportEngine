@@ -12,15 +12,15 @@ import org.hibernate.validator.constraints.Length;
 public class ReportScheuduleEntity {
 	@Length(min=1,message="Invalid SQL query")
 	private String query;
-	@Length(min=4,message="Invalid time")
+	//@Length(min=4,message="Invalid time")
 	private String time;
 	@Length(min=1,message="Invalid frequency")
 	private String frequency;
 	@Length(min=1,message="Invalid mailId")
 	private String mailId;
-	@Length(min=1,message="Invalid day")
+	//@Length(min=1,message="Invalid day")
 	private String  day;
-	@Length(min=1,message="Invalid date time")
+	//@Length(min=1,message="Invalid date time")
 	private String dateTime;
 	public String getQuery() {
 		return query;

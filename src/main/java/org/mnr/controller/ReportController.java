@@ -26,7 +26,7 @@ public class ReportController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveSchedule(
-		    ReportScheuduleEntity reportScheuduleEntity,
+			@Valid ReportScheuduleEntity reportScheuduleEntity,
 			BindingResult bind, final RedirectAttributes redirectAttributes) {
 		System.out.println("saveSchedule method");
 		ModelAndView modelAndView = new ModelAndView("schedule");
