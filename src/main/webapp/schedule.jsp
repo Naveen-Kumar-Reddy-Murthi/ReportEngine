@@ -11,30 +11,45 @@
 <title>ScheduleReport</title>
 </head>
 <body>
+	
 	<%@taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 	<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-	<%-- <%@taglib uri="http://www.java.sun.com/jsp/jstl/core" prefix="jstl" %> --%>
-	
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
 
 <div class="container">
+
+		
 		<sf:form action="save" modelAttribute="reportScheuduleEntity" class="form-horizontal" method="post">
+		
+		<jstl:set var="message" value="<%=request.getAttribute(\"message\")%>"/>
+		<jstl:if test="${not empty message}">
+		message:<div class="form-group row">
+		<div class="alert alert-success">
+ 	 		<strong>Data saved successfully!</strong>
+		</div>
+		</div>
+		</jstl:if>
+		
 			<div class="form-group row">
-			<spring:bind path="mailId">
+			<spring:bind path="mailId"> 
+			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-xs-2 col-form-label">Email</label>
 				<div class="col-xs-5">
 					<sf:input path="mailId" type="text" class="form-control"
 						id="mailId" placeholder="Recepient's Email" />
 					<sf:errors path="mailId" class="control-label" />
 				</div>
+				</div>
 			</spring:bind>
 			</div>
 			
 			<div class="form-group row">
 			<spring:bind path="frequency">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-xs-2 col-form-label">Frequency</label>
 				<div class="col-xs-5">
 					<sf:select path="frequency" type="text" class="form-control" id="frequency">
-						<sf:option value="" label="------"/>
+						<sf:option value="" selected="selected" label="select"/>
 						<sf:option value="D" label="Daily"/>
 						<sf:option value="W" label="Weekly"/>
 						<sf:option value="M" label="Monthly"/>
@@ -42,24 +57,29 @@
 					</sf:select>
 					<sf:errors path="frequency" class="control-label" />
 				</div>
-			</spring:bind>
-			</div>
-			
-			<div class="form-group row">
-			<spring:bind path="time">
-				<label class="col-xs-2 col-form-label">Time</label>
-				<div class="col-xs-5">
-					<sf:input path="time" type="time" class="form-control" id="time" />
-					<sf:errors path="time" class="control-label" />
 				</div>
 			</spring:bind>
 			</div>
 			
 			<div class="form-group row">
+			<spring:bind path="time">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
+				<label class="col-xs-2 col-form-label">Time</label>
+				<div class="col-xs-5">
+					<sf:input path="time" type="time" class="form-control" id="time" />
+					<sf:errors path="time" class="control-label" />
+				</div>
+				</div>
+			</spring:bind>
+			</div>
+			
+			<div class="form-group row" style="display:none;">
 			<spring:bind path="day">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-xs-2 col-form-label">Day</label>
 				<div class="col-xs-5">
 					<sf:select path="day" type="text" class="form-control" id="day" >
+						<sf:option value="" selected="selected" label="select"/>
 						<sf:option value="Monday" label="Monday"/>
 						<sf:option value="Tuesday" label="Tuesday"/>
 						<sf:option value="Wednessday" label="Wednessday"/>
@@ -70,26 +90,31 @@
 					</sf:select>
 					<sf:errors path="day" class="control-label" />
 				</div>
+				</div>
 			</spring:bind>
 			</div>
 			
 			<div class="form-group row">
 			<spring:bind path="dateTime">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-xs-2 col-form-label">Date Time</label>
 				<div class="col-xs-5">
 					<sf:input path="dateTime" type="datetime-local" class="form-control" id="dateTime" />
 					<sf:errors path="dateTime" class="control-label" />
+				</div>
 				</div>
 			</spring:bind>
 			</div>
 			
 			<div class="form-group row">
 			<spring:bind path="query">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-xs-2 col-form-label">Query</label>
 				<div class="col-xs-5">
 					<sf:input path="query" type="textArea" class="form-control"
 						id="query" placeholder="Enter valid SQL query" />
 					<sf:errors path="query" class="control-label" />
+				</div>
 				</div>
 			</spring:bind>
 			</div>

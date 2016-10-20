@@ -10,17 +10,17 @@ import org.hibernate.validator.constraints.Length;
  * @version 1.0
  */
 public class ReportScheuduleEntity {
-	@NotNull(message="Value can't be empty")
+	@Length(min=1,message="Invalid SQL query")
 	private String query;
-	@Length(min=4)
+	@Length(min=4,message="Invalid time")
 	private String time;
-	@NotNull(message="Value can't be empty")
+	@Length(min=1,message="Invalid frequency")
 	private String frequency;
-	@Email(message="Invalid Email id")
+	@Length(min=1,message="Invalid mailId")
 	private String mailId;
-	@NotNull(message="Value can't be empty")
+	@Length(min=1,message="Invalid day")
 	private String  day;
-	@NotNull(message="Value can't be empty")
+	@Length(min=1,message="Invalid date time")
 	private String dateTime;
 	public String getQuery() {
 		return query;
