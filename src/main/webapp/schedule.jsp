@@ -20,26 +20,26 @@
 
 	function toggleFields() {
 		if ($("#frequency").val() === "") {
-			$("#day-div").show();
-			$("#time-div").show();
+			/* $("#day-div").show();
+			$("#time-div").show(); */
 			$("#dateTime-div").show();
 		} else if ($("#frequency").val() === "D") {
-			$("#day-div").hide();
-			$("#dateTime-div").hide();
-			$("#time-div").show();
+			/* $("#day-div").hide(); */
+			$("#dateTime-div").show();
+			$("#time-div").hide();
 		} else if ($("#frequency").val() === "W") {
-			$("#dateTime-div").hide();
-			$("#day-div").show();
-			$("#time-div").show();
+			$("#dateTime-div").show();
+			/* $("#day-div").hide(); */
+			$("#time-div").hide();
 		}
 		else if ($("#frequency").val() === "M") {
 			$("#time-div").hide();
-			$("#day-div").hide();
+			/* $("#day-div").hide(); */
 			$("#dateTime-div").show();
 		}
 		else if ($("#frequency").val() === "Y") {
 			$("#time-div").hide();
-			$("#day-div").hide();
+			/* $("#day-div").hide(); */
 			$("#dateTime-div").show();
 		}
 	}
@@ -105,7 +105,7 @@
 				</spring:bind>
 			</div>
 
-			<div class="form-group row" id="day-div">
+			<%-- <div class="form-group row" id="day-div">
 				<spring:bind path="day">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="col-xs-2 col-form-label">Day</label>
@@ -124,9 +124,9 @@
 						</div>
 					</div>
 				</spring:bind>
-			</div>
+			</div> --%>
 
-			<div class="form-group row" id="time-div">
+			<div class="form-group row" id="time-div" style="display: none">
 				<spring:bind path="time">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
 						<label class="col-xs-2 col-form-label">Time</label>

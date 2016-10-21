@@ -18,9 +18,12 @@
     http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 	
-	<context:component-scan base-package="org.mnr.entity, org.mnr.controller, org.mnr.dao, org.mnr.service"/>
+	<context:component-scan base-package="org.mnr.entity,
+	 org.mnr.controller, org.mnr.dao, org.mnr.service"/>
 	 <tx:annotation-driven transaction-manager="hibernateTransactionManager"/> 
 	<mvc:annotation-driven/>
+	<!-- <mvc:resources mapping="/resources/**" location="/resources/" /> -->
+	<mvc:default-servlet-handler/>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value=""/>
@@ -67,6 +70,35 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean> 
 	
+	<bean id="job" class="org.mnr.engine.job.Job"/>
 	
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<bean id="jobBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="job"/>
+		<property name="targetMethod" value="task"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	
+	<bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="jobBean" />
+		<property name="repeatInterval" value="3000"/>
+		<property name="startDelay" value="0"/>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="jobBean"/>
+			</list>
+		</property>
+		
+		<property name="triggers">
+			<list>
+				<ref bean="simpleTriggerBean"/>
+			</list>
+		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+	</bean>
+	
+	<bean id="appContextProvider" class="org.mnr.engine.utilities.ApplicationContextProvider"/>
+	
 </beans>

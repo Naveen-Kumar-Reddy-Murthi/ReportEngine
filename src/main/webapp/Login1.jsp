@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="bootstrap/jquery-1.9.1.min.js"></script><!--needed  -->
-<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script><!-- needed  -->
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/><!-- needed -->
+<script type="text/javascript"
+	src="resources/bootstrap/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/css/bootstrap.css" />
 <style>
 body {
     padding-top: 90px;

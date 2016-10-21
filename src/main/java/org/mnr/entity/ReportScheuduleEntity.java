@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Entity(name = "REPORT_SCHEDULE")
 @SequenceGenerator(name = "report_seq", allocationSize = 1, initialValue = 1, sequenceName = "report_seq")
 public class ReportScheuduleEntity implements Serializable {
-
+  
 	/**
 	 * 
 	 */
@@ -45,15 +45,15 @@ public class ReportScheuduleEntity implements Serializable {
 	@Column
 	private String frequency;
 	
-	@Length(min = 1, message = "Invalid mailId")
+	@Length(min = 1, message = "Invalid Email Id")
 	@Column
 	private String mailId;
 	
 	// @Length(min=1,message="Invalid day")
-	@Column
-	private String day;
+//	@Column
+//	private String day;
 	
-	// @Length(min=1,message="Invalid date time")
+	@Length(min=1,message="Invalid Date Time")
 	@Column
 	private String dateTime;
 
@@ -97,13 +97,13 @@ public class ReportScheuduleEntity implements Serializable {
 		this.mailId = mailId;
 	}
 
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
-	}
+//	public String getDay() {
+//		return day;
+//	}
+//
+//	public void setDay(String day) {
+//		this.day = day;
+//	}
 
 	public String getDateTime() {
 		return dateTime;
@@ -126,8 +126,6 @@ public class ReportScheuduleEntity implements Serializable {
 		builder.append(frequency);
 		builder.append(", mailId=");
 		builder.append(mailId);
-		builder.append(", day=");
-		builder.append(day);
 		builder.append(", dateTime=");
 		builder.append(dateTime);
 		builder.append("]");

@@ -2,6 +2,7 @@ package org.mnr.controller;
 
 import javax.validation.Valid;
 
+import org.mnr.entity.LoginEntity;
 import org.mnr.entity.ReportScheuduleEntity;
 import org.mnr.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -28,6 +30,14 @@ public class ReportController {
 		this.reportService = reportService;
 	}
 
+	@RequestMapping(value="/login")
+	public ModelAndView login(LoginEntity loginEntity){
+		
+		
+		return null;
+	}
+	
+	
 	@RequestMapping(value = "/schedule")
 	public ModelAndView scheduleReport(
 			ReportScheuduleEntity reportScheuduleEntity) {
