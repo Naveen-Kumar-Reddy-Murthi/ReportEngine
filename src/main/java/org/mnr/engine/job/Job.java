@@ -43,11 +43,12 @@ public class Job implements ApplicationContextAware {
 		
 		JobService	service	=	new JobService();	
 		
-		service.generateReport("select * from employee");
-		System.out.println("Job Method");
+		//service.generateReport("select * from employee");
+//		System.out.println("Job Method");
 //		JobService service = new JobService();
 		try {
 			service.executeService();
+//			System.out.println("after execute service");
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -28,41 +28,41 @@ public class JobService {
 	private SessionFactory sessionFactory = SessionFactoryBuilder
 			.getSessionFactory();
 
+	// public static void main(String... args) throws ParseException,
+	// EmailException {
+	//
+	// JobService service = new JobService();
+	// String messageBody = "";
+	// //
+	// // service.generateReport("select * from employee");
+	//
+	// List<ReportScheuduleEntity> data = service.fetchDetails();
+	// // System.out.println(data.size());
+	// for(ReportScheuduleEntity entity:data){
+	// messageBody=service.processRecord(entity);
+	// service.sendMail(messageBody, entity.getMailId());
+	// }
+	// }
 
-//	public static void main(String... args) throws ParseException, EmailException {
-//		
-//		JobService service = new JobService();
-//		String messageBody	=	"";
-////
-////		service.generateReport("select * from employee");
-//
-//		 List<ReportScheuduleEntity> data = service.fetchDetails();
-//		 System.out.println(data.size());
-//		 for(ReportScheuduleEntity entity:data){
-//			 messageBody=service.processRecord(entity);
-//			 service.sendMail(messageBody, entity.getMailId());
-//		 }
-//	}
-	
-	public void executeService() throws EmailException, ParseException{
-		 
-		 String messageBody	=	"";
-		 List<ReportScheuduleEntity> data = fetchDetails();
-		 System.out.println(data.size());
-		 for(ReportScheuduleEntity entity:data){
-			 messageBody=processRecord(entity);
-			 sendMail(messageBody, entity.getMailId());
-		 }
+	public void executeService() throws EmailException, ParseException {
+
+		String messageBody = "";
+		List<ReportScheuduleEntity> data = fetchDetails();
+		// System.out.println(data.size());
+		for (ReportScheuduleEntity entity : data) {
+			messageBody = processRecord(entity);
+			sendMail(messageBody, entity.getMailId());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<ReportScheuduleEntity> fetchDetails() {
-	
+
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(ReportScheuduleEntity.class);
 		List<ReportScheuduleEntity> data = criteria.list();
 		session.close();
-		System.out.println(data);
+		// System.out.println(data);
 		return data;
 	}
 
@@ -73,41 +73,37 @@ public class JobService {
 		Date curDate = new Date();
 		String data = null;
 
+		String inputDateString = entity.getDateTime().replace('T', ' ');
+		formatter = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+		Date inputDate = formatter.parse(inputDateString);
 		if (frequency.equals(Frequency.DAILY.getFlag())) {
-			generateReport(entity.getQuery());
-		} else {// if (frequency.equals(Frequency.WEEKLY.getFlag()))
-
-			String inputDateString = entity.getDateTime().replace('T', ' ');
-			formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			Date inputDate = formatter.parse(inputDateString);
-
-			if (frequency.equals(Frequency.WEEKLY.getFlag())) {
-				formatter = new SimpleDateFormat("EEEE");
-				if (formatter.format(curDate).equals(
-						formatter.format(inputDate))) {
-					System.out.println("weekly match");
-					data = generateReport(entity.getQuery());
-				}
-			} else if (frequency.equals(Frequency.MONTHLY.getFlag())) {
-				formatter = new SimpleDateFormat("dd");
-				if (formatter.format(curDate).equals(
-						formatter.format(inputDate))) {
-					System.out.println("monthly match");
-					data = generateReport(entity.getQuery());
-				}
-			} else if (frequency.equals(Frequency.YEARLY.getFlag())) {
-				formatter = new SimpleDateFormat("dd-MM");
-				System.out
-						.println("day of year:" + formatter.format(inputDate));
-				if (formatter.format(curDate).equals(
-						formatter.format(inputDate))) {
-					System.out.println("yearly match");
-					data = generateReport(entity.getQuery());
-				}
+			formatter = new SimpleDateFormat("kk:mm");
+			if (formatter.format(curDate).equals(formatter.format(inputDate))) {
+				System.out.println("daily match-->id" + entity.getId());
+				data = generateReport(entity.getQuery());
 			}
-
+		} else if (frequency.equals(Frequency.WEEKLY.getFlag())) {
+			formatter = new SimpleDateFormat("EEEE, kk:mm");
+			if (formatter.format(curDate).equals(formatter.format(inputDate))) {
+				System.out.println("weekly match");
+				data = generateReport(entity.getQuery());
+			}
+		} else if (frequency.equals(Frequency.MONTHLY.getFlag())) {
+			formatter = new SimpleDateFormat("dd kk:mm");
+			if (formatter.format(curDate).equals(formatter.format(inputDate))) {
+				System.out.println("monthly match");
+				data = generateReport(entity.getQuery());
+			}
+		} else if (frequency.equals(Frequency.YEARLY.getFlag())) {
+			formatter = new SimpleDateFormat("dd-MM kk:mm");
+			System.out.println("day of year:" + formatter.format(inputDate));
+			if (formatter.format(curDate).equals(formatter.format(inputDate))) {
+				System.out.println("yearly match");
+				data = generateReport(entity.getQuery());
+			}
 		}
 
+		// System.out.println("process Record:"+data);
 		return data;
 	}
 
@@ -123,8 +119,9 @@ public class JobService {
 			System.out.println(exception.toString());
 		}
 		session.close();
+		// System.out.println("before report generation");
 		if (aliasToValueMapList.isEmpty() != true) {
-			System.out.println(aliasToValueMapList);
+			// System.out.println(aliasToValueMapList);
 			htmlData = new StringBuilder("<table style=\"width:30%\"><tr>");
 			for (String key : aliasToValueMapList.get(0).keySet()) {
 				htmlData.append("<th>");
@@ -148,26 +145,30 @@ public class JobService {
 			}
 			htmlData.append("</table>");
 		}
-		System.out.println(htmlData);
+		// System.out.println("HtmlData:"+htmlData);
 
 		return htmlData.toString();
 	}
-	
-	private void sendMail(String body, String reciever) throws EmailException{
-		
-		if((!"".equals(body)&&body!=null)&&(!"".equals(reciever)&&reciever!=null)){
-			
-			HtmlEmail mail	=	new HtmlEmail();
-			mail.setDebug(true);
+
+	private void sendMail(String body, String reciever) throws EmailException {
+		// System.out.println("in sendMail");
+		// System.out.println("Body:"+body);
+		// System.out.println("reciever:"+reciever);
+		if ((!"".equals(body) && body != null)
+				&& (!"".equals(reciever) && reciever != null)) {
+			// System.out.println("inside sendMail if condition");
+			HtmlEmail mail = new HtmlEmail();
+			mail.setDebug(false);
 			mail.setHostName("smtp.gmail.com");
 			mail.setSmtpPort(465);
-			mail.setAuthenticator(new DefaultAuthenticator("mnreddy.nv@gmail.com", "xmsbzntaabjeeweg"));
+			mail.setAuthenticator(new DefaultAuthenticator(
+					"mnreddy.nv@gmail.com", "xmsbzntaabjeeweg"));
 			mail.setSSLOnConnect(true);
 			mail.setFrom("mnreddy.nv@gmail.com");
 			mail.setSubject("Report");
 			mail.setHtmlMsg(body);
-			mail.addTo(new String[]{reciever});
-			mail.addCc(new String[]{"mnreddy.nv@gmail.com"});
+			mail.addTo(new String[] { reciever });
+			mail.addCc(new String[] { "mnreddy.nv@gmail.com" });
 			mail.send();
 		}
 	}

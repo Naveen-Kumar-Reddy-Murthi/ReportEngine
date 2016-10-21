@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,32 +16,39 @@
 
 	<div class="container">
 
-		<form method="POST" action="login" class="form-signin">
+		<sf:form method="post" action="login" modelAttribute="loginEntity" class="form-signin">
 			<h2 class="form-heading">Log in</h2>
 			
 			<div class="form-group row">
-				<spring:bind path="mailId">
+				<spring:bind path="userId">
 					<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="col-xs-2 col-form-label">Email</label>
+						<label class="col-xs-2 col-form-label">User Id</label>
 						<div class="col-xs-5">
-							<sf:input path="mailId" type="text" class="form-control"
-								id="mailId" placeholder="Recepient's Email" />
-							<sf:errors path="mailId" class="control-label" />
+							<sf:input path="userId" type="text" class="form-control"
+								id="userId" placeholder="Enter User Id" />
+							<sf:errors path="userId" class="control-label" />
 						</div>
 					</div>
 				</spring:bind>
 			</div>
 
-			<div class="form-group">
-				 <input name="username" type="text"
-					class="form-control" placeholder="Username" /> <input
-					name="password" type="password" class="form-control"
-					placeholder="Password" /> <span>${error}</span>
-
-				<button class="btn btn-lg btn-primary btn-block" type="submit">LogIn</button>
+			<div class="form-group row">
+				<spring:bind path="password">
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="col-xs-2 col-form-label">User Id</label>
+						<div class="col-xs-5">
+							<sf:input path="password" type="password" class="form-control"
+								id="password" placeholder="Enter Password" />
+							<sf:errors path="userId" class="control-label" />
+						</div>
+					</div>
+				</spring:bind>
+			</div>
+			<div class="col-sm-offset-5 col-md-14">
+				<button class="btn btn-md btn-primary pull-center" type="submit">LogIn</button>
 			</div>
 
-		</form>
+		</sf:form>
 
 	</div>
 	<!-- /container -->

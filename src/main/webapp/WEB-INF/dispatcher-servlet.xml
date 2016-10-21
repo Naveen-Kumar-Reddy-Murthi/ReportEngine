@@ -22,8 +22,8 @@
 	 org.mnr.controller, org.mnr.dao, org.mnr.service"/>
 	 <tx:annotation-driven transaction-manager="hibernateTransactionManager"/> 
 	<mvc:annotation-driven/>
-	<!-- <mvc:resources mapping="/resources/**" location="/resources/" /> -->
-	<mvc:default-servlet-handler/>
+	<mvc:resources mapping="/resources/**" location="/resources/" /> 
+	<!-- <mvc:default-servlet-handler/> -->
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value=""/>
@@ -80,7 +80,7 @@
 	
 	<bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="jobBean" />
-		<property name="repeatInterval" value="3000"/>
+		<property name="repeatInterval" value="5000"/>
 		<property name="startDelay" value="0"/>
 	</bean>
 	
