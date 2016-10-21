@@ -6,15 +6,16 @@ import org.hibernate.SessionFactory;
 import org.mnr.entity.ReportScheuduleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 /**
  * @author naveen.reddy
  * @version 1.0
  */
-@Repository(value="reportDaoImpl")
+@Repository(value = "reportDaoImpl")
 public class ReportDaoImpl implements ReportDAO {
 
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;

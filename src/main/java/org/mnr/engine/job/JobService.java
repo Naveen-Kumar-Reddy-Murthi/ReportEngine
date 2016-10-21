@@ -28,22 +28,6 @@ public class JobService {
 	private SessionFactory sessionFactory = SessionFactoryBuilder
 			.getSessionFactory();
 
-	// public static void main(String... args) throws ParseException,
-	// EmailException {
-	//
-	// JobService service = new JobService();
-	// String messageBody = "";
-	// //
-	// // service.generateReport("select * from employee");
-	//
-	// List<ReportScheuduleEntity> data = service.fetchDetails();
-	// // System.out.println(data.size());
-	// for(ReportScheuduleEntity entity:data){
-	// messageBody=service.processRecord(entity);
-	// service.sendMail(messageBody, entity.getMailId());
-	// }
-	// }
-
 	public void executeService() throws EmailException, ParseException {
 
 		String messageBody = "";
@@ -107,6 +91,7 @@ public class JobService {
 		return data;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	String generateReport(String queryString) {
 		List<Map<String, Object>> aliasToValueMapList = null;
 		StringBuilder htmlData = new StringBuilder("");

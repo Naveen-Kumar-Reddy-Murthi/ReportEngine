@@ -7,13 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.stereotype.Service;
 
 /**
  * @author Naveen Reddy
@@ -23,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Entity(name = "REPORT_SCHEDULE")
 @SequenceGenerator(name = "report_seq", allocationSize = 1, initialValue = 1, sequenceName = "report_seq")
 public class ReportScheuduleEntity implements Serializable {
-  
+
 	/**
 	 * 
 	 */
@@ -34,26 +29,26 @@ public class ReportScheuduleEntity implements Serializable {
 	private int id;
 
 	@Length(min = 1, message = "Invalid SQL query")
-	@Column(length=5000)
+	@Column(length = 5000)
 	private String query;
-	
+
 	// @Length(min=4,message="Invalid time")
 	@Column
 	private String time;
-	
+
 	@Length(min = 1, message = "Invalid frequency")
 	@Column
 	private String frequency;
-	
+
 	@Length(min = 1, message = "Invalid Email Id")
 	@Column
 	private String mailId;
-	
+
 	// @Length(min=1,message="Invalid day")
-//	@Column
-//	private String day;
-	
-	@Length(min=1,message="Invalid Date Time")
+	// @Column
+	// private String day;
+
+	@Length(min = 1, message = "Invalid Date Time")
 	@Column
 	private String dateTime;
 
@@ -97,13 +92,13 @@ public class ReportScheuduleEntity implements Serializable {
 		this.mailId = mailId;
 	}
 
-//	public String getDay() {
-//		return day;
-//	}
-//
-//	public void setDay(String day) {
-//		this.day = day;
-//	}
+	// public String getDay() {
+	// return day;
+	// }
+	//
+	// public void setDay(String day) {
+	// this.day = day;
+	// }
 
 	public String getDateTime() {
 		return dateTime;

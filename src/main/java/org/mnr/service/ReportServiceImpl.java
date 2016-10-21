@@ -2,8 +2,6 @@ package org.mnr.service;
 
 import java.util.List;
 
-import javax.persistence.Transient;
-
 import org.mnr.dao.ReportDAO;
 import org.mnr.entity.ReportScheuduleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,8 @@ public class ReportServiceImpl implements ReportService {
 		this.reportDao = reportDao;
 	}
 
-	
 	@Override
-	@Transactional(rollbackFor=Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public void saveOrUpdate(ReportScheuduleEntity entity) {
 		if (getById(entity.getId()) == null) {
 			reportDao.save(entity);
@@ -37,7 +34,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public void delete(int id) {
 		reportDao.delete(id);
 
