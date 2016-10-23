@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * @author Naveen Reddy
@@ -47,7 +48,7 @@ public class ReportController {
 			return modelAndView;
 		else {
 
-			modelAndView = new ModelAndView("schedule");
+			modelAndView = new ModelAndView(new RedirectView("/schedule", true));
 			modelAndView.addObject("reportScheuduleEntity",
 					new ReportScheuduleEntity());
 		}
