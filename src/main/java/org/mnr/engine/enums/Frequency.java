@@ -23,7 +23,7 @@ public enum Frequency {
 	}
 
 	public static void main(String... args) {
-		System.out.println(Frequency.DAILY.getFlag().equals("D"));
+		System.out.println(Frequency.DAILY.getFlag());
 	}
 
 }
